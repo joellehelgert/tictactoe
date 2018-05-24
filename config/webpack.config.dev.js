@@ -123,6 +123,11 @@ module.exports = {
         include: paths.appSrc,
       },
       {
+        test: /\.scss$/,
+        include: paths.appSrc,
+        loaders: ["style-loader", "css-loader", "sass-loader"]
+      },
+      {
         // "oneOf" will traverse all following loaders until one will
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.
@@ -138,11 +143,7 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
-          {
-            test: /\.scss$/,
-            include: paths.appSrc,
-            loaders: ["style", "css", "sass"]
-          },
+
           // Process JS with Babel.
           {
             test: /\.(js|jsx|mjs)$/,
@@ -157,7 +158,7 @@ module.exports = {
             },
           },
           // "postcss" loader applies autoprefixer to our CSS.
-          // "css" loader resolves paths in CSS and adds assets as dependencies.
+          // "css" loadefr resolves paths in CSS and adds assets as dependencies.
           // "style" loader turns CSS into JS modules that inject <style> tags.
           // In production, we use a plugin to extract that CSS to a file, but
           // in development "style" loader enables hot editing of CSS.
