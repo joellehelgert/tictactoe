@@ -29,16 +29,18 @@ class Board extends Component  {
     })
   }
 
+  competitorPlays () {
+    console.log('Computergegener')
+  }
+
   checkForWinner () {
     let board = this.state.board
 
     for(let i = 0; i < board.length; i++) {
-      console.log('board', board)
+
       // horizontal
       if(board[i][0] != null && board[i][0] === board[i][1]) {
-        console.log('horizontal', (board[i][0] === board[i][1]))
         if(board[i][1] === board[i][2]) {
-
           this.setState({ winner: board[i][0]})
           return
         }
@@ -53,7 +55,21 @@ class Board extends Component  {
       }
     }
 
-    // diagonal
+    // diagonal left to right
+    if(board[0][0] != null && board[0][0] === board[1][1]) {
+      if (board[0][0] === board[2][2]) {
+        this.setState({ winner: board[0][0]})
+        return
+      }
+    }
+
+    // diagonal right to left
+    if(board[2][0] != null && board[2][0] === board[1][1]) {
+      if (board[2][0] === board[0][2]) {
+        this.setState({ winner: board[2][0]})
+        return
+      }
+    }
 
   }
 
@@ -76,7 +92,7 @@ class Board extends Component  {
         })
       }
 
-      // call Gegenspieler
+      if(this.props.competitor) this.competitorPlays()
       this.checkForWinner()
     }
 
