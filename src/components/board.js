@@ -30,10 +30,11 @@ class Board extends Component  {
   }
 
   competitorPlays () {
-    console.log('Computergegener')
+
   }
 
   checkForWinner () {
+    // TODO check wether board is filled
     let board = this.state.board
 
     for(let i = 0; i < board.length; i++) {

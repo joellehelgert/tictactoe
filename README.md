@@ -13,3 +13,4 @@
   * Markieren der Gewinnermelodie
   * Namen hinterlegen
   * optimized Performance
+  * Animations
