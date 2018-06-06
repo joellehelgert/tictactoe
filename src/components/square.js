@@ -11,7 +11,9 @@ class Square extends Component {
 
     return (
       <div className="square" onClick={() => this.props.setPlayer(this.props.row, this.props.column)}>
+        <p className="player">
       {player}
+        </p>
       </div>
     )
   }

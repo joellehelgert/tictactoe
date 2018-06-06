@@ -1,7 +1,56 @@
-.board {
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-  &__row {
+.board {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5em;
+  position: relative;
+
+  .board_plate {
+    box-shadow: 9px 10px 5px 0px rgba(0,0,0,0.75);
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+  }
+
+  .current_player {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+  }
+
+  .info {
+    text-align: center;
+  }
+}
+
+.winner {
+  opacity: 0.1;
+}
+
+.won {
+  position: absolute;
+  z-index: 10000000;
+  width: 100%;
+  left: 0;
+  top: 20vh;
+  color: black;
+  font-size: 2em;
+  font-weight: 800;
+  line-height: 1.5em;
+  margin: 0 0 0.5em;
+  text-align: center;
+  text-transform: uppercase;
+
+  @media (min-width: 20em) {
+    font-size: 3em;
+  }
+
+  @media (min-width: 50em) {
+    font-size: 4em;
   }
 }

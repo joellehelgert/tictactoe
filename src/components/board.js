@@ -108,29 +108,34 @@ class Board extends Component  {
     let winner = this.state.winner
     let error
 
-    if(winner != null) winner = (<div>Das Spiel wurde gewonnen von Spieler {this.getPlayer()} </div>)
+    if(winner != null) winner = (<div className="won">Spieler {this.getPlayer()} gewinnt</div>)
     if(this.state.error) error = (<div className='error'>Dieses Feld ist schon besetzt.</div>)
 
     return (
       <div className="board">
-        <div className="board__row">
-          <Square row='0' column='0' setPlayer={this.setPlayer.bind(this)} player={board[0][0]} />
-          <Square row='0' column='1' setPlayer={this.setPlayer.bind(this)} player={board[0][1]} />
-          <Square row='0' column='2' setPlayer={this.setPlayer.bind(this)} player={board[0][2]} />
-        </div>
-        <div className="board__row">
-          <Square row='1' column='0' setPlayer={this.setPlayer.bind(this)} player={board[1][0]} />
-          <Square row='1' column='1' setPlayer={this.setPlayer.bind(this)} player={board[1][1]} />
-          <Square row='1' column='2' setPlayer={this.setPlayer.bind(this)} player={board[1][2]} />
-        </div>
-        <div className="board__row">
-          <Square row='2' column='0' setPlayer={this.setPlayer.bind(this)} player={board[2][0]} />
-          <Square row='2' column='1' setPlayer={this.setPlayer.bind(this)} player={board[2][1]} />
-          <Square row='2' column='2' setPlayer={this.setPlayer.bind(this)} player={board[2][2]} />
-        </div>
-        <div>aktueller Spieler: {this.getPlayer()}</div>
-        {error}
-        {winner}
+          <h1 className={(winner != null ? 'winner' :'nowinner')}>Tic Tac Toe</h1>
+          <div className="info">
+              <div className={"current_player "+(winner != null ? 'winner' :'nowinner')}>Aktueller Spieler: {this.getPlayer()}</div>
+              {error}
+              {winner}
+          </div>
+          <div className={'board_plate '+(winner != null ? 'winner' :'nowinner')}>
+              <div className="board__row">
+                <Square row='0' column='0' setPlayer={this.setPlayer.bind(this)} player={board[0][0]} />
+                <Square row='0' column='1' setPlayer={this.setPlayer.bind(this)} player={board[0][1]} />
+                <Square row='0' column='2' setPlayer={this.setPlayer.bind(this)} player={board[0][2]} />
+              </div>
+              <div className="board__row">
+                <Square row='1' column='0' setPlayer={this.setPlayer.bind(this)} player={board[1][0]} />
+                <Square row='1' column='1' setPlayer={this.setPlayer.bind(this)} player={board[1][1]} />
+                <Square row='1' column='2' setPlayer={this.setPlayer.bind(this)} player={board[1][2]} />
+              </div>
+              <div className="board__row">
+                <Square row='2' column='0' setPlayer={this.setPlayer.bind(this)} player={board[2][0]} />
+                <Square row='2' column='1' setPlayer={this.setPlayer.bind(this)} player={board[2][1]} />
+                <Square row='2' column='2' setPlayer={this.setPlayer.bind(this)} player={board[2][2]} />
+              </div>
+          </div>
       </div>
     )
   }
