@@ -1,6 +1,7 @@
 {
   "short_name": "Tic Tac Toe",
   "name": "Tic Tac Toe",
+  "description": "Ein klassisches, einfaches Zweipersonen-Strategiespiel.",
   "icons": [
     {
       "src": "favicon.ico",
