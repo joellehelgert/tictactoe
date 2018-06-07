@@ -19,6 +19,10 @@ class Board extends Component  {
   }
 
   componentWillMount () {
+    this.clear()
+  }
+
+  clear () {
     let board = new Array(3)
     let available = new Array(9)
 
@@ -27,6 +31,10 @@ class Board extends Component  {
     }
 
     for(let i = 0; i < available.length; i++) {
+      let row = 1
+      if(i > 3 && i < 6) row = 2
+      if(i > 6) row = 3
+
       available[i] = i
     }
 
@@ -37,22 +45,13 @@ class Board extends Component  {
   }
 
   competitorPlays () {
-    let availableLength = this.state.availableLength
-    let pos = Math.random() * availableLength
+    let available = this.state.available
+    let availableLength = available.length - 1
+    let pos = Math.floor(Math.random() * availableLength)
 
-  /*  switch (pos) {
-      case < 3:
-        setPlayer(1, pos);
-        break;
-      case < 6:
-        setPlayer(2, pos-3);
-        break;
-      case < 9:
-        setPlayer(3, pos-6);
-        break;
-
-    }
-    */
+    if(available[pos] < 3) this.setPlayer(available[pos], 0)
+    else if(available[pos] < 6) this.setPlayer(available[pos]-3, 1);
+    else if(available[pos] < 9) this.setPlayer(available[pos]-6, 2);
   }
 
   checkForWinner () {
@@ -96,7 +95,7 @@ class Board extends Component  {
     }
   }
 
- setPlayer (row, column) {
+ setPlayer (column, row) {
    let winner = this.state.winner
    let over = this.state.over
 
@@ -104,40 +103,46 @@ class Board extends Component  {
      let available = this.state.available
      let board = this.state.board
      let currentPlayer = this.state.currentPlayer
+     let posInAvailable = (row + 1 ) * 3 - (3 - column)
+     if(board[column][row] == null) {
+        board[column][row] = currentPlayer
 
-     if(board[row][column] == null) {
-        board[row][column] = currentPlayer
-        //available.slice(available.findIndex(row * column), 1)
+        let found = available.findIndex((elem) => elem === posInAvailable)
+        available.splice(found, 1)
+
         this.setState({
           available: available,
           board: board,
           currentPlayer: !currentPlayer,
           error: false
+        }, () => {
+          if(this.props.competitor && this.state.currentPlayer !== this.state.firstPlayer)
+            setTimeout(() => this.competitorPlays(), 600)
+          this.checkForWinner()
         })
       } else {
         this.setState({
           error: true
         })
       }
-
-      //if(this.props.competitor) this.competitorPlays()
-      this.checkForWinner()
     }
 
   }
 
-  getPlayer () {
-    return this.state.currentPlayer ? 'X' : 'O'
+  getPlayer (player) {
+    return player ? 'X' : 'O'
   }
 
   render() {
-    console.log(this.state)
+
+    if(this.state.newgame) this.componentWillMount()
+
     let board = this.state.board
     let winner = this.state.winner
     let error = this.state.error
     let over = this.state.over
 
-    if(winner != null) winner = (<div>Das Spiel wurde gewonnen von Spieler {this.getPlayer()} </div>)
+    if(winner != null) winner = (<div className='won'>Spieler {this.getPlayer(this.state.currentPlayer)} hat das Spiel gewonnen! </div>)
     if(error) error = (<div className='error'>Dieses Feld ist schon besetzt.</div>)
     if(winner == null && over) over = (<div>Das Spielfeld ist voll und es gibt keinen Gewinner. </div>)
 
@@ -146,24 +151,31 @@ class Board extends Component  {
 
     return (
       <div className="board">
-        <div className="board__row">
-          <Square row='0' column='0' setPlayer={this.setPlayer.bind(this)} player={board[0][0]} />
-          <Square row='0' column='1' setPlayer={this.setPlayer.bind(this)} player={board[0][1]} />
-          <Square row='0' column='2' setPlayer={this.setPlayer.bind(this)} player={board[0][2]} />
-        </div>
-        <div className="board__row">
-          <Square row='1' column='0' setPlayer={this.setPlayer.bind(this)} player={board[1][0]} />
-          <Square row='1' column='1' setPlayer={this.setPlayer.bind(this)} player={board[1][1]} />
-          <Square row='1' column='2' setPlayer={this.setPlayer.bind(this)} player={board[1][2]} />
-        </div>
-        <div className="board__row">
-          <Square row='2' column='0' setPlayer={this.setPlayer.bind(this)} player={board[2][0]} />
-          <Square row='2' column='1' setPlayer={this.setPlayer.bind(this)} player={board[2][1]} />
-          <Square row='2' column='2' setPlayer={this.setPlayer.bind(this)} player={board[2][2]} />
-        </div>
-        <div>aktueller Spieler: {this.getPlayer()}</div>
-        {error}
-        {winner}
+          <h1 className={(winner != null ? 'winner' :'nowinner')}>Tic Tac Toe</h1>
+          <div className="info">
+              <div className={"current_player "+(winner != null ? 'winner' :'nowinner')}>Aktueller Spieler: {this.getPlayer(!this.state.currentPlayer)}</div>
+              {error}
+              {winner}
+          </div>
+          <button onClick={this.clear.bind(this)}>Spiel neustarten</button>
+
+          <div className={'board_plate '+(winner != null ? 'winner' :'nowinner')}>
+              <div className="board__row">
+                <Square row={0} column={0} setPlayer={this.setPlayer.bind(this)} player={board[0][0]} />
+                <Square row={0} column={1} setPlayer={this.setPlayer.bind(this)} player={board[0][1]} />
+                <Square row={0} column={2} setPlayer={this.setPlayer.bind(this)} player={board[0][2]} />
+              </div>
+              <div className="board__row">
+                <Square row={1} column={0} setPlayer={this.setPlayer.bind(this)} player={board[1][0]} />
+                <Square row={1} column={1} setPlayer={this.setPlayer.bind(this)} player={board[1][1]} />
+                <Square row={1} column={2} setPlayer={this.setPlayer.bind(this)} player={board[1][2]} />
+              </div>
+              <div className="board__row">
+                <Square row={2} column={0} setPlayer={this.setPlayer.bind(this)} player={board[2][0]} />
+                <Square row={2} column={1} setPlayer={this.setPlayer.bind(this)} player={board[2][1]} />
+                <Square row={2} column={2} setPlayer={this.setPlayer.bind(this)} player={board[2][2]} />
+              </div>
+          </div>
       </div>
     )
   }

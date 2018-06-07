@@ -7,6 +7,7 @@ import './App.scss'
 class App extends Component {
   constructor (props) {
     super(props)
+    this.child = React.createRef();
     this.state = {
       competitor: true
     }
@@ -19,7 +20,7 @@ class App extends Component {
   render() {
     return (
       <div className='game'>
-        <Board competitor={this.state.competitor}/>
+        <Board ref={this.child} competitor={this.state.competitor} newgame={this.state.newgame} />
 
         Mit Computergegener spielen
         <input type='checkbox' onChange={this.changePlayerMode.bind(this)} checked={this.state.competitor} />
