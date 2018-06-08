@@ -21,10 +21,27 @@
   .current_player {
     font-size: 1.5em;
     margin-bottom: 1em;
+    text-transform: uppercase;
   }
 
   .info {
     text-align: center;
+  }
+
+  .restart{
+    text-transform: uppercase;
+    margin: 1em;
+    padding: 1em 1.5em;
+    background-color: #555555;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .restart:hover {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
   }
 }
 

@@ -157,7 +157,7 @@ class Board extends Component  {
               {error}
               {winner}
           </div>
-          <button onClick={this.clear.bind(this)}>Spiel neustarten</button>
+          <button className="restart" onClick={this.clear.bind(this)}>Spiel neustarten</button>
 
           <div className={'board_plate '+(winner != null ? 'winner' :'nowinner')}>
               <div className="board__row">

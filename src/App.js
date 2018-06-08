@@ -21,10 +21,11 @@ class App extends Component {
     return (
       <div className='game'>
         <Board ref={this.child} competitor={this.state.competitor} newgame={this.state.newgame} />
-
-        Mit Computergegener spielen
-        <input type='checkbox' onChange={this.changePlayerMode.bind(this)} checked={this.state.competitor} />
-        Ohne Computergegener spielen
+          <div className="competitor">Ohne Computergegener spielen | Mit Computergegener spielen</div>
+          <label className="switch">
+            <input type='checkbox' onChange={this.changePlayerMode.bind(this)} checked={this.state.competitor} />
+            <span className="slider"></span>
+          </label>
       </div>
     )
   }
