@@ -14,3 +14,19 @@
   * Namen hinterlegen
   * optimized Performance
   * Animations
+  
+# Aufgabenverteilung
+  Joelle Helgert
+   * Anlegen der PWA
+   * Einführung in React
+   * Programmierlogik
+    
+  Julia Lehner
+   * Design 
+  
+  Marlene Grabmaier 
+   * Design
+ 
+   Christina Schirz
+   * Design
+  
