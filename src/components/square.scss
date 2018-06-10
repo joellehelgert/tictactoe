@@ -23,12 +23,14 @@
 .player {
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 0.5em;
+  line-height: 0.5;
+  margin: 0;
 
   @media (min-width: 20em) {
     font-size: 2em;
   }
 
   @media (min-width: 50em) {
-    font-size: 8em;
+    font-size: 5em;
   }
 }

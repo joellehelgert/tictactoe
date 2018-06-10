@@ -49,14 +49,14 @@
   opacity: 0.1;
 }
 
-.won {
+.won, .over {
   position: absolute;
   z-index: 10000000;
   width: 100%;
   left: 0;
-  top: 20vh;
+  top: 40vh;
   color: black;
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: 800;
   line-height: 1.5em;
   margin: 0 0 0.5em;
@@ -64,10 +64,10 @@
   text-transform: uppercase;
 
   @media (min-width: 20em) {
-    font-size: 3em;
+    font-size: 2em;
   }
 
   @media (min-width: 50em) {
-    font-size: 4em;
+    font-size: 3em;
   }
 }
