@@ -59,7 +59,7 @@ class Board extends Component  {
 
   checkForWinner () {
     if(this.state.available.length === 0) this.setState({ over: true });
-    else {
+
       let board = this.state.board;
 
       for(let i = 0; i < board.length; i++) {
@@ -95,7 +95,7 @@ class Board extends Component  {
           return
         }
       }
-    }
+
   }
 
  setPlayer (column, row) {

@@ -1,5 +1,5 @@
 
-html {
+body {
   font-family: 'Raleway',sans-serif;
   width: 100%;
   min-height: 100vh;
@@ -10,7 +10,7 @@ html {
   background-image: url("./image/background-unsplash.jpg");
 }
 
-html::after {
+body::after {
   content: '';
   position: absolute;
   top: 0;
