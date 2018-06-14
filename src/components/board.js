@@ -58,15 +58,18 @@ class Board extends Component  {
   }
 
   checkForWinner () {
-    if(this.state.available.length === 0) this.setState({ over: true });
-
-      let board = this.state.board;
+    let over = this.state.available.length === 0
+    let board = this.state.board
 
       for(let i = 0; i < board.length; i++) {
         // horizontal
         if(board[i][0] != null && board[i][0] === board[i][1]) {
           if(board[i][1] === board[i][2]) {
-            this.setState({ winner: board[i][0]});
+            this.setState({
+              winner: board[i][0],
+              over,
+              currentPlayer: this.state.firstPlayer
+            })
             return
           }
         }
@@ -74,7 +77,11 @@ class Board extends Component  {
         // vertical
         if(board[0][i] != null && board[0][i] === board[1][i]) {
           if(board[0][i] === board[2][i]) {
-            this.setState({ winner: board[0][i]});
+            this.setState({
+              winner: board[0][i],
+              over,
+              currentPlayer: this.state.firstPlayer
+            })
             return
           }
         }
@@ -83,7 +90,11 @@ class Board extends Component  {
       // diagonal left to right
       if(board[0][0] != null && board[0][0] === board[1][1]) {
         if (board[0][0] === board[2][2]) {
-          this.setState({ winner: board[0][0]});
+          this.setState({
+            winner: board[0][0],
+            over,
+            currentPlayer: this.state.firstPlayer
+           })
           return
         }
       }
@@ -91,7 +102,11 @@ class Board extends Component  {
       // diagonal right to left
       if(board[2][0] != null && board[2][0] === board[1][1]) {
         if (board[2][0] === board[0][2]) {
-          this.setState({ winner: board[2][0], over: true });
+          this.setState({
+            winner: board[2][0],
+            over,
+            currentPlayer: this.state.firstPlayer
+           })
           return
         }
       }
@@ -99,16 +114,16 @@ class Board extends Component  {
   }
 
  setPlayer (column, row) {
-   let winner = this.state.winner;
-   let over = this.state.over;
+   let winner = this.state.winner
+   let over = this.state.over
 
    if(winner == null && over === false){
-     let available = this.state.available;
-     let board = this.state.board;
-     let currentPlayer = this.state.currentPlayer;
-     let posInAvailable = (row + 1 ) * 3 - (3 - column);
+     let available = this.state.available
+     let board = this.state.board
+     let currentPlayer = this.state.currentPlayer
+     let posInAvailable = (row + 1 ) * 3 - (3 - column)
      if(board[column][row] == null) {
-        board[column][row] = currentPlayer;
+        board[column][row] = currentPlayer
 
         let found = available.findIndex((elem) => elem === posInAvailable);
         available.splice(found, 1);
@@ -120,7 +135,7 @@ class Board extends Component  {
           error: false
         }, () => {
           if(this.props.competitor && this.state.currentPlayer !== this.state.firstPlayer)
-            setTimeout(() => this.competitorPlays(), 600);
+            setTimeout(() => this.competitorPlays(), 600)
           this.checkForWinner()
         })
       } else {
