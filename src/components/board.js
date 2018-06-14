@@ -148,7 +148,6 @@ class Board extends Component  {
   }
 
   getPlayer (player) {
-    console.log(player)
     return player ? 'X' : 'O'
   }
 
@@ -164,10 +163,6 @@ class Board extends Component  {
     if(winner != null) winner = (<div className='won'>Spieler {this.getPlayer(!winner)} hat das Spiel gewonnen! </div>)
     if(error) error = (<div className='error'>Dieses Feld ist schon besetzt.</div>)
     if(winner == null && over) over = (<div className="over">Das Spielfeld ist voll und es gibt keinen Gewinner. </div>)
-
-
-    // TODO
-    // disable (class for) field when over or won
 
     return (
       <div className="board">
