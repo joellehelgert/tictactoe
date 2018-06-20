@@ -1,4 +1,4 @@
-# readMe tictactoe
+# TicTacToe PWA with React
 
 ## Aufgabenverteilung 
   * Einführung in React durch Joelle 
